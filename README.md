@@ -1,172 +1,135 @@
-# 🚀 Global Startup Valuation Prediction & Business Intelligence System
+# 🚀 BizPredict AI
 
-An end-to-end Machine Learning and Business Intelligence application that analyzes startup data, explores financial performance, and predicts startup valuations using Linear Regression.
+### Startup Valuation & Business Intelligence Platform
 
-## 📌 Project Overview
+**Predict Smarter. Analyze Better.**
 
-This project combines Machine Learning, data analysis, and interactive visualization in a Streamlit web application.
+BizPredict AI is a machine learning-powered startup valuation
+prediction and business intelligence platform built using Python,
+Scikit-learn, Streamlit, and Plotly.
 
-Users can explore startup funding, revenue, valuation, profitability, industry performance, and regional trends. They can also enter startup characteristics to generate estimated valuations.
+The platform combines predictive analytics, interactive dashboards,
+and financial intelligence to explore startup performance.
 
-**Dataset:** 500 startup records with 12 columns.
+## ✨ Key Features
 
-> Note: The dataset is used for educational and analytical purposes. Predictions are estimates and should not be treated as verified market valuations or financial advice.
-
-## ✨ Features
-
-### 1. Overview Dashboard
-- Key performance indicators
-- Industry and regional analysis
-- Profitability filtering
-- Interactive visualizations
-- Filtered dataset export to CSV
-
-### 2. Business Intelligence
-- Industry performance analysis
-- Regional performance analysis
-- Founding-year and startup growth analysis
+### 📊 Interactive Dashboard
+- Startup funding and valuation analysis
+- Industry and regional distributions
 - Profitability analysis
-- Financial correlation heatmap
-- Industry and regional report exports
+- Interactive financial visualizations
+- Advanced filtering and CSV export
 
-### 3. Startup Valuation Prediction
-- Machine Learning-based valuation estimates
-- Input validation warnings
+### 🧠 Machine Learning Prediction
+- Startup valuation prediction using Linear Regression
+- Automated feature preprocessing
+- Input validation
 - Industry and regional valuation comparisons
 - Prediction history
-- Prediction history export
-- Model process and limitation explanations
+- Model transparency and limitations
 
-### 4. Model Performance
-- R-squared (R²)
-- Mean Absolute Error (MAE)
-- Root Mean Squared Error (RMSE)
+### 📈 Business Intelligence
+- Industry performance analysis
+- Regional performance analysis
+- Startup founding-year trends
+- Financial correlation heatmaps
+- Profitability comparisons
+- Downloadable analytics reports
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- Streamlit
-- Plotly
-- Matplotlib
-- Seaborn
-- Joblib
+| Category | Technologies |
+|----------|--------------|
+| Programming | Python |
+| Data Processing | Pandas, NumPy |
+| Machine Learning | Scikit-learn |
+| Visualization | Plotly, Matplotlib, Seaborn |
+| Web Application | Streamlit |
+| Model Storage | Joblib |
+| Version Control | Git, GitHub |
 
 ## 🤖 Machine Learning Model
 
-The project uses a trained Scikit-learn Pipeline containing:
+**Algorithm:** Linear Regression
 
-- One-Hot Encoding for categorical features
-- Standard Scaling for numerical features
-- Linear Regression for valuation prediction
+**Preprocessing:**
+- One-Hot Encoding for categorical variables
+- Standard Scaling for numerical variables
+- Binary profitability feature
 
-### Input Features
+**Target Variable:** Startup Valuation (Million USD)
 
-- Industry
-- Funding Rounds
-- Funding Amount
-- Revenue
-- Employees
-- Market Share
-- Profitability
-- Year Founded
-- Region
+### Previously Recorded Test Performance
 
-### Model Evaluation
-
-Previously recorded test-set results:
-
-| Metric | Result |
-|---|---:|
+| Metric | Value |
+|--------|-------|
 | R² Score | 0.6715 |
-| Mean Absolute Error | $426.71 million |
-| Root Mean Squared Error | $567.90 million |
+| MAE | $426.71 Million |
+| RMSE | $567.90 Million |
 
-These are previously recorded evaluation results, not a guarantee of future performance. The model's accuracy depends on the dataset's quality and representativeness.
+These results were recorded during model evaluation
+and are not recalculated by the Streamlit application.
 
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```text
-Project 02/
-├── .streamlit/
-│   └── config.toml
-├── models/
-│   └── startup_valuation_model.pkl
+BizPredict-AI/
+│
 ├── app.py
 ├── startup_data.csv
 ├── requirements.txt
 ├── README.md
-└── .gitignore
+├── PROJECT.ipynb
+│
+├── models/
+│   └── startup_valuation_model.pkl
+│
+└── .streamlit/
+    └── config.toml
 ```
 
-## ⚙️ Installation and Setup
+## ⚙️ Installation
 
-### 1. Clone the repository
+Clone the repository:
 
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-cd <YOUR_REPOSITORY_FOLDER>
+git clone https://github.com/YOUR_USERNAME/bizpredict-ai.git
 ```
 
-Replace the placeholders with your actual GitHub repository URL and folder name.
-
-### 2. Create a virtual environment
+Navigate into the project:
 
 ```bash
-python -m venv .venv
+cd bizpredict-ai
 ```
 
-### 3. Activate the environment
-
-**Windows PowerShell:**
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### 4. Install dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Run the application
+Run the Streamlit application:
 
 ```bash
 python -m streamlit run app.py
 ```
 
-The application will open in your browser.
-
-## 🚀 Deployment
-
-The application can be deployed using Streamlit Community Cloud by connecting the GitHub repository and selecting `app.py` as the application entry point.
-
-Ensure the dataset, trained model, and required dependencies are available in the repository.
-
 ## ⚠️ Limitations
 
-- Predictions are estimates, not verified startup valuations.
-- Dataset patterns may not represent the entire startup ecosystem.
+- Valuation predictions are statistical estimates.
 - The model may produce inaccurate or negative predictions.
-- Industry and regional averages describe the available dataset only.
-- Correlation does not establish causation.
+- Model performance depends on the training dataset.
+- The dataset should not be assumed to represent the entire startup market.
+- Predictions should not be treated as investment advice.
 
-## 👨‍💻 Project Purpose
+## 🚀 Future Enhancements
 
-This project demonstrates practical skills in:
-
-- Data analysis and visualization
-- Exploratory Data Analysis (EDA)
-- Machine Learning pipelines
-- Regression modeling
-- Business Intelligence
-- Interactive dashboard development
-- Data export and reporting
-- Application deployment
+- Additional machine learning algorithms
+- Model explainability and feature contribution analysis
+- Persistent prediction history
+- PDF report generation
+- Real-world startup data integration
 
 ---
 
-**Built with Python, Machine Learning, and Streamlit.**
+**BizPredict AI — Predict Smarter. Analyze Better.**

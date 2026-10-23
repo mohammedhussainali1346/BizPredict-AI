@@ -49,7 +49,7 @@ from pathlib import Path
 # --------------------------------------------------
 
 st.set_page_config(
-    page_title="Global Startup Intelligence",
+    page_title="BizPredict AI",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -193,11 +193,9 @@ if "prediction_history" not in st.session_state:
 # SIDEBAR
 # --------------------------------------------------
 
-st.sidebar.title("🚀 Startup Intelligence")
+st.sidebar.title("🚀 BizPredict AI")
 
-st.sidebar.markdown(
-    "Global Startup Valuation Prediction & Business Intelligence System"
-)
+st.sidebar.caption("Startup Valuation & Business Intelligence Platform")
 
 page = st.sidebar.radio(
     "Navigation",
@@ -218,12 +216,11 @@ st.sidebar.caption("Powered by Machine Learning & Streamlit")
 
 if page == "Overview Dashboard":
 
-    st.title("🚀 Global Startup Intelligence Dashboard")
+    st.title("🚀 BizPredict AI")
 
-    st.markdown(
-        "Explore startup funding, revenue, valuation, "
-        "and global business performance."
-    )
+    st.markdown("### Startup Valuation & Business Intelligence Platform")
+
+    st.caption("Predict Smarter. Analyze Better.")
 
     st.divider()
 
@@ -1601,4 +1598,4 @@ elif page == "Model Performance":
 
 st.divider()
 
-st.caption("Global Startup Valuation Prediction & Business Intelligence System")
+st.caption("© 2026 BizPredict AI | Predict Smarter. Analyze Better.")
