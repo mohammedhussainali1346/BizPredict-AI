@@ -2,6 +2,10 @@
 
 ### Startup Valuation & Business Intelligence Platform
 
+## 🌐 Live Demo
+
+🚀 **Try BizPredict AI:** [Launch Application](https://bizpredict-ai.streamlit.app)
+
 **Predict Smarter. Analyze Better.**
 
 BizPredict AI is a machine learning-powered startup valuation
