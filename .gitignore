@@ -1,0 +1,41 @@
+# Virtual environments
+bizpredictvenv/
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Backup files
+app_backup.py
+*.bak
+
+# Temporary files
+*.log
+*.tmp
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
