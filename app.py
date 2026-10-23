@@ -49,7 +49,7 @@ from pathlib import Path
 # --------------------------------------------------
 
 st.set_page_config(
-    page_title="Biz Predict AI",
+    page_title="BizPredict AI",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -193,7 +193,7 @@ if "prediction_history" not in st.session_state:
 # SIDEBAR
 # --------------------------------------------------
 
-st.sidebar.title("🚀 BizPredict AI")
+st.sidebar.title("🚀 Biz Predict AI")
 
 st.sidebar.caption("Startup Valuation & Business Intelligence Platform")
 
@@ -216,7 +216,7 @@ st.sidebar.caption("Powered by Machine Learning & Streamlit")
 
 if page == "Overview Dashboard":
 
-    st.title("🚀 BizPredict AI")
+    st.title("🚀 Biz Predict AI")
 
     st.markdown("### Startup Valuation & Business Intelligence Platform")
 
