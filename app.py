@@ -156,8 +156,8 @@ div[data-testid="stDataFrame"] {
 
 BASE_DIR = Path(__file__).resolve().parent
 
-DATA_PATH = BASE_DIR / "startup_data.csv"
-MODEL_PATH = BASE_DIR / "models" / "startup_valuation_model.pkl"
+DATA_PATH = BASE_DIR / "startup_data_india.csv"
+MODEL_PATH = BASE_DIR / "models" / "startup_valuation_model_india.pkl"
 
 # --------------------------------------------------
 # LOAD DATA AND MODEL
@@ -193,9 +193,11 @@ if "prediction_history" not in st.session_state:
 # SIDEBAR
 # --------------------------------------------------
 
-st.sidebar.title("🚀 Biz Predict AI")
+st.sidebar.title("🚀 Startup Intelligence")
 
-st.sidebar.caption("Startup Valuation & Business Intelligence Platform")
+st.sidebar.markdown(
+    "Global Startup Valuation Prediction & Business Intelligence System"
+)
 
 page = st.sidebar.radio(
     "Navigation",
@@ -209,6 +211,7 @@ page = st.sidebar.radio(
 
 st.sidebar.divider()
 st.sidebar.caption("Powered by Machine Learning & Streamlit")
+st.sidebar.caption("Financial values shown in ₹ Crores")
 
 # --------------------------------------------------
 # PAGE 1: OVERVIEW DASHBOARD
@@ -216,11 +219,12 @@ st.sidebar.caption("Powered by Machine Learning & Streamlit")
 
 if page == "Overview Dashboard":
 
-    st.title("🚀 Biz Predict AI")
+    st.title("🚀 Global Startup Intelligence Dashboard")
 
-    st.markdown("### Startup Valuation & Business Intelligence Platform")
-
-    st.caption("Predict Smarter. Analyze Better.")
+    st.markdown(
+        "Explore startup funding, revenue, valuation, "
+        "and global business performance."
+    )
 
     st.divider()
 
@@ -270,16 +274,16 @@ if page == "Overview Dashboard":
     st.divider()
 
     total_startups = len(dashboard_df)
-    total_funding = dashboard_df["Funding Amount (M USD)"].sum()
-    average_valuation = dashboard_df["Valuation (M USD)"].mean()
-    average_revenue = dashboard_df["Revenue (M USD)"].mean()
+    total_funding = dashboard_df["Funding Amount (Cr INR)"].sum()
+    average_valuation = dashboard_df["Valuation (Cr INR)"].mean()
+    average_revenue = dashboard_df["Revenue (Cr INR)"].mean()
 
     col1, col2, col3, col4 = st.columns(4)
 
     col1.metric("Total Startups", f"{total_startups:,}")
-    col2.metric("Total Funding", f"${total_funding:,.2f}M")
-    col3.metric("Average Valuation", f"${average_valuation:,.2f}M")
-    col4.metric("Average Revenue", f"${average_revenue:,.2f}M")
+    col2.metric("Total Funding", f"₹{total_funding:,.2f} Cr")
+    col3.metric("Average Valuation", f"₹{average_valuation:,.2f} Cr")
+    col4.metric("Average Revenue", f"₹{average_revenue:,.2f} Cr")
 
     st.divider()
 
@@ -352,7 +356,7 @@ if page == "Overview Dashboard":
     st.download_button(
         label="📥 Download Filtered Startup Data",
         data=csv_data,
-        file_name="filtered_startup_data.csv",
+        file_name="filtered_startup_data_india.csv",
         mime="text/csv",
         use_container_width=True,
         key="download_dashboard_data",
@@ -383,8 +387,8 @@ if page == "Overview Dashboard":
 
         fig = px.scatter(
             dashboard_df,
-            x="Funding Amount (M USD)",
-            y="Valuation (M USD)",
+            x="Funding Amount (Cr INR)",
+            y="Valuation (Cr INR)",
             color="Industry",
             hover_name="Startup Name",
             title="Funding and Valuation Relationship",
@@ -402,8 +406,8 @@ if page == "Overview Dashboard":
 
         fig = px.scatter(
             dashboard_df,
-            x="Revenue (M USD)",
-            y="Valuation (M USD)",
+            x="Revenue (Cr INR)",
+            y="Valuation (Cr INR)",
             color="Region",
             hover_name="Startup Name",
             title="Revenue and Valuation Relationship",
@@ -450,16 +454,16 @@ if page == "Overview Dashboard":
 
         st.subheader("Top 10 Startups by Valuation")
 
-        top_startups = dashboard_df.nlargest(10, "Valuation (M USD)").sort_values(
-            "Valuation (M USD)"
+        top_startups = dashboard_df.nlargest(10, "Valuation (Cr INR)").sort_values(
+            "Valuation (Cr INR)"
         )
 
         fig = px.bar(
             top_startups,
-            x="Valuation (M USD)",
+            x="Valuation (Cr INR)",
             y="Startup Name",
             orientation="h",
-            color="Valuation (M USD)",
+            color="Valuation (Cr INR)",
             color_continuous_scale="Blues",
             title="Highest-Valued Startups",
         )
@@ -474,7 +478,9 @@ elif page == "Business Intelligence":
 
     st.title("📊 Business Intelligence Analytics")
 
-    st.markdown("Analyze global startup performance across industries and regions.")
+    st.markdown(
+        "Analyze startup performance across industries and regions using the converted synthetic dataset."
+    )
 
     st.divider()
 
@@ -508,13 +514,13 @@ elif page == "Business Intelligence":
         st.subheader("Funding by Industry")
 
         funding_data = filtered_df.groupby("Industry", as_index=False)[
-            "Funding Amount (M USD)"
+            "Funding Amount (Cr INR)"
         ].sum()
 
         fig = px.bar(
             funding_data,
             x="Industry",
-            y="Funding Amount (M USD)",
+            y="Funding Amount (Cr INR)",
             color="Industry",
             title="Total Funding by Industry",
         )
@@ -534,13 +540,13 @@ elif page == "Business Intelligence":
         st.subheader("Average Valuation by Region")
 
         valuation_data = filtered_df.groupby("Region", as_index=False)[
-            "Valuation (M USD)"
+            "Valuation (Cr INR)"
         ].mean()
 
         fig = px.bar(
             valuation_data,
             x="Region",
-            y="Valuation (M USD)",
+            y="Valuation (Cr INR)",
             color="Region",
             title="Average Startup Valuation by Region",
         )
@@ -559,10 +565,10 @@ elif page == "Business Intelligence":
 
     fig = px.scatter(
         filtered_df,
-        x="Funding Amount (M USD)",
-        y="Valuation (M USD)",
+        x="Funding Amount (Cr INR)",
+        y="Valuation (Cr INR)",
         color="Industry",
-        size="Revenue (M USD)",
+        size="Revenue (Cr INR)",
         hover_name="Startup Name",
         title="Funding and Startup Valuation Relationship",
     )
@@ -581,8 +587,8 @@ elif page == "Business Intelligence":
 
     fig = px.scatter(
         filtered_df,
-        x="Revenue (M USD)",
-        y="Valuation (M USD)",
+        x="Revenue (Cr INR)",
+        y="Valuation (Cr INR)",
         color="Region",
         hover_name="Startup Name",
         title="Revenue and Valuation Relationship",
@@ -608,16 +614,16 @@ elif page == "Business Intelligence":
 
     industry_performance = filtered_df.groupby("Industry", as_index=False).agg(
         {
-            "Funding Amount (M USD)": "mean",
-            "Revenue (M USD)": "mean",
-            "Valuation (M USD)": "mean",
+            "Funding Amount (Cr INR)": "mean",
+            "Revenue (Cr INR)": "mean",
+            "Valuation (Cr INR)": "mean",
         }
     )
 
     metric_options = {
-        "Average Funding": "Funding Amount (M USD)",
-        "Average Revenue": "Revenue (M USD)",
-        "Average Valuation": "Valuation (M USD)",
+        "Average Funding": "Funding Amount (Cr INR)",
+        "Average Revenue": "Revenue (Cr INR)",
+        "Average Valuation": "Valuation (Cr INR)",
     }
 
     selected_metric = st.selectbox(
@@ -658,9 +664,9 @@ elif page == "Business Intelligence":
         .agg(
             {
                 "Startup Name": "count",
-                "Funding Amount (M USD)": "mean",
-                "Revenue (M USD)": "mean",
-                "Valuation (M USD)": "mean",
+                "Funding Amount (Cr INR)": "mean",
+                "Revenue (Cr INR)": "mean",
+                "Valuation (Cr INR)": "mean",
             }
         )
         .rename(columns={"Startup Name": "Startup Count"})
@@ -668,9 +674,9 @@ elif page == "Business Intelligence":
 
     regional_metric_options = {
         "Startup Count": "Startup Count",
-        "Average Funding": "Funding Amount (M USD)",
-        "Average Revenue": "Revenue (M USD)",
-        "Average Valuation": "Valuation (M USD)",
+        "Average Funding": "Funding Amount (Cr INR)",
+        "Average Revenue": "Revenue (Cr INR)",
+        "Average Valuation": "Valuation (Cr INR)",
     }
 
     selected_regional_metric = st.selectbox(
@@ -716,7 +722,7 @@ elif page == "Business Intelligence":
         filtered_df.groupby("Year Founded", as_index=False)
         .agg(
             Startup_Count=("Startup Name", "count"),
-            Average_Valuation=("Valuation (M USD)", "mean"),
+            Average_Valuation=("Valuation (Cr INR)", "mean"),
         )
         .sort_values("Year Founded")
     )
@@ -775,7 +781,7 @@ elif page == "Business Intelligence":
         y="Average_Valuation",
         markers=True,
         title="Average Startup Valuation by Founding Year",
-        labels={"Average_Valuation": "Average Valuation (Million USD)"},
+        labels={"Average_Valuation": "Average Valuation (Cr INR)"},
     )
 
     display_chart(fig)
@@ -819,16 +825,16 @@ elif page == "Business Intelligence":
         "Profitability Status", as_index=False
     ).agg(
         {
-            "Funding Amount (M USD)": "mean",
-            "Revenue (M USD)": "mean",
-            "Valuation (M USD)": "mean",
+            "Funding Amount (Cr INR)": "mean",
+            "Revenue (Cr INR)": "mean",
+            "Valuation (Cr INR)": "mean",
         }
     )
 
     financial_metric_options = {
-        "Average Funding": "Funding Amount (M USD)",
-        "Average Revenue": "Revenue (M USD)",
-        "Average Valuation": "Valuation (M USD)",
+        "Average Funding": "Funding Amount (Cr INR)",
+        "Average Revenue": "Revenue (Cr INR)",
+        "Average Valuation": "Valuation (Cr INR)",
     }
 
     selected_financial_metric = st.selectbox(
@@ -940,9 +946,9 @@ elif page == "Business Intelligence":
     # Select numerical features for correlation analysis
     correlation_columns = [
         "Funding Rounds",
-        "Funding Amount (M USD)",
-        "Valuation (M USD)",
-        "Revenue (M USD)",
+        "Funding Amount (Cr INR)",
+        "Valuation (Cr INR)",
+        "Revenue (Cr INR)",
         "Employees",
         "Market Share (%)",
         "Profitable",
@@ -994,8 +1000,8 @@ elif page == "Business Intelligence":
     st.subheader("Features Correlated with Startup Valuation")
 
     valuation_correlations = (
-        correlation_matrix["Valuation (M USD)"]
-        .drop("Valuation (M USD)")
+        correlation_matrix["Valuation (Cr INR)"]
+        .drop("Valuation (Cr INR)")
         .dropna()
         .sort_values(ascending=False)
         .reset_index()
@@ -1045,9 +1051,9 @@ elif page == "Business Intelligence":
             filtered_df.groupby("Industry")
             .agg(
                 Startup_Count=("Industry", "size"),
-                Total_Funding=("Funding Amount (M USD)", "sum"),
-                Average_Valuation=("Valuation (M USD)", "mean"),
-                Average_Revenue=("Revenue (M USD)", "mean"),
+                Total_Funding=("Funding Amount (Cr INR)", "sum"),
+                Average_Valuation=("Valuation (Cr INR)", "mean"),
+                Average_Revenue=("Revenue (Cr INR)", "mean"),
                 Profitability_Rate=("Profitable", "mean"),
             )
             .reset_index()
@@ -1063,9 +1069,9 @@ elif page == "Business Intelligence":
             filtered_df.groupby("Region")
             .agg(
                 Startup_Count=("Region", "size"),
-                Total_Funding=("Funding Amount (M USD)", "sum"),
-                Average_Valuation=("Valuation (M USD)", "mean"),
-                Average_Revenue=("Revenue (M USD)", "mean"),
+                Total_Funding=("Funding Amount (Cr INR)", "sum"),
+                Average_Valuation=("Valuation (Cr INR)", "mean"),
+                Average_Revenue=("Revenue (Cr INR)", "mean"),
                 Profitability_Rate=("Profitable", "mean"),
             )
             .reset_index()
@@ -1148,12 +1154,10 @@ elif page == "Valuation Prediction":
             )
 
             funding_amount = st.number_input(
-                "Funding Amount (Million USD)", min_value=0.0, value=100.0
+                "Funding Amount (Cr INR)", min_value=0.0, value=100.0
             )
 
-            revenue = st.number_input(
-                "Revenue (Million USD)", min_value=0.0, value=50.0
-            )
+            revenue = st.number_input("Revenue (Cr INR)", min_value=0.0, value=50.0)
 
             employees = st.number_input(
                 "Number of Employees", min_value=0, value=500, step=1
@@ -1184,8 +1188,8 @@ elif page == "Valuation Prediction":
                 {
                     "Industry": industry,
                     "Funding Rounds": funding_rounds,
-                    "Funding Amount (M USD)": funding_amount,
-                    "Revenue (M USD)": revenue,
+                    "Funding Amount (Cr INR)": funding_amount,
+                    "Revenue (Cr INR)": revenue,
                     "Employees": employees,
                     "Market Share (%)": market_share,
                     "Profitable": 1 if profitable == "Yes" else 0,
@@ -1201,8 +1205,8 @@ elif page == "Valuation Prediction":
 
         numeric_features = [
             "Funding Rounds",
-            "Funding Amount (M USD)",
-            "Revenue (M USD)",
+            "Funding Amount (Cr INR)",
+            "Revenue (Cr INR)",
             "Employees",
             "Market Share (%)",
             "Year Founded",
@@ -1260,13 +1264,13 @@ elif page == "Valuation Prediction":
                 "Industry": industry,
                 "Region": region,
                 "Funding Rounds": funding_rounds,
-                "Funding Amount (M USD)": funding_amount,
-                "Revenue (M USD)": revenue,
+                "Funding Amount (Cr INR)": funding_amount,
+                "Revenue (Cr INR)": revenue,
                 "Employees": employees,
                 "Market Share (%)": market_share,
                 "Profitable": profitable,
                 "Year Founded": year_founded,
-                "Predicted Valuation (M USD)": round(prediction, 2),
+                "Predicted Valuation (Cr INR)": round(prediction, 2),
             }
 
             st.session_state.prediction_history.append(prediction_record)
@@ -1279,9 +1283,11 @@ elif page == "Valuation Prediction":
 
                 st.success("Valuation prediction completed successfully!")
 
-                st.metric("Estimated Startup Valuation", f"${prediction:,.2f} Million")
+                st.metric("Estimated Startup Valuation", f"₹{prediction:,.2f} Crores")
 
-                st.caption(f"Approximately ${prediction / 1000:,.3f} Billion USD")
+                st.caption(
+                    f"Equivalent to approximately ₹{prediction / 100:,.2f} billion"
+                )
 
                 # --------------------------------------------------
                 # VALUATION COMPARISON
@@ -1293,22 +1299,22 @@ elif page == "Valuation Prediction":
 
                 # Calculate average valuation for selected industry
                 industry_average = df.loc[
-                    df["Industry"] == industry, "Valuation (M USD)"
+                    df["Industry"] == industry, "Valuation (Cr INR)"
                 ].mean()
 
                 # Calculate average valuation for selected region
                 regional_average = df.loc[
-                    df["Region"] == region, "Valuation (M USD)"
+                    df["Region"] == region, "Valuation (Cr INR)"
                 ].mean()
 
                 # Display comparison metrics
                 col1, col2, col3 = st.columns(3)
 
-                col1.metric("Predicted Valuation", f"${prediction:,.2f}M")
+                col1.metric("Predicted Valuation", f"₹{prediction:,.2f} Cr")
 
-                col2.metric("Industry Average", f"${industry_average:,.2f}M")
+                col2.metric("Industry Average", f"₹{industry_average:,.2f} Cr")
 
-                col3.metric("Regional Average", f"${regional_average:,.2f}M")
+                col3.metric("Regional Average", f"₹{regional_average:,.2f} Cr")
 
                 # Create comparison dataset
                 comparison_df = pd.DataFrame(
@@ -1318,7 +1324,7 @@ elif page == "Valuation Prediction":
                             "Industry Average",
                             "Regional Average",
                         ],
-                        "Valuation (M USD)": [
+                        "Valuation (Cr INR)": [
                             prediction,
                             industry_average,
                             regional_average,
@@ -1330,7 +1336,7 @@ elif page == "Valuation Prediction":
                 fig = px.bar(
                     comparison_df,
                     x="Category",
-                    y="Valuation (M USD)",
+                    y="Valuation (Cr INR)",
                     color="Category",
                     text_auto=".2f",
                     title="Startup Valuation Comparison",
@@ -1431,7 +1437,7 @@ elif page == "Valuation Prediction":
         fig = px.bar(
             chart_df,
             x="Prediction Number",
-            y="Predicted Valuation (M USD)",
+            y="Predicted Valuation (Cr INR)",
             color="Industry",
             hover_data=["Region", "Timestamp"],
             title="Historical Startup Valuation Predictions",
@@ -1479,8 +1485,8 @@ elif page == "Valuation Prediction":
 
     st.markdown(
         "The prediction system uses a trained Linear Regression "
-        "model to estimate startup valuation based on financial "
-        "and operational characteristics."
+        "model to estimate startup valuation in Indian rupee crores "
+        "based on financial and operational characteristics."
     )
 
     with st.expander("🔍 View Prediction Process"):
@@ -1521,7 +1527,7 @@ elif page == "Valuation Prediction":
         ### Step 4: Valuation Output
 
         The application displays the estimated startup
-        valuation in millions of US dollars.
+        valuation in Indian rupee crores.
         """)
 
     with st.expander("⚠️ Model Limitations"):
@@ -1551,7 +1557,7 @@ elif page == "Model Performance":
 
     st.write("**Algorithm:** Linear Regression")
     st.write("**Preprocessing:** One-Hot Encoding + Standard Scaling")
-    st.write("**Target:** Valuation (Million USD)")
+    st.write("**Target:** Valuation (Cr INR)")
     st.write("**Dataset Size:** 500 Startups")
 
     st.divider()
@@ -1561,8 +1567,8 @@ elif page == "Model Performance":
     col1, col2, col3 = st.columns(3)
 
     col1.metric("R² Score", "0.6715")
-    col2.metric("MAE", "$426.71M")
-    col3.metric("RMSE", "$567.90M")
+    col2.metric("MAE", "₹3,840.40 Cr")
+    col3.metric("RMSE", "₹5,111.06 Cr")
 
     st.markdown("""
     **Understanding the metrics**
@@ -1598,4 +1604,4 @@ elif page == "Model Performance":
 
 st.divider()
 
-st.caption("© 2026 BizPredict AI | Predict Smarter. Analyze Better.")
+st.caption("Global Startup Valuation Prediction & Business Intelligence System")
