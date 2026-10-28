@@ -193,7 +193,7 @@ if "prediction_history" not in st.session_state:
 # SIDEBAR
 # --------------------------------------------------
 
-st.sidebar.title("🚀 Startup Intelligence")
+st.sidebar.title("🚀BizPredict AI")
 
 st.sidebar.markdown(
     "Global Startup Valuation Prediction & Business Intelligence System"
@@ -219,9 +219,10 @@ st.sidebar.caption("Financial values shown in ₹ Crores")
 
 if page == "Overview Dashboard":
 
-    st.title("🚀 Global Startup Intelligence Dashboard")
+    st.title("🚀 BizPredict AI")
 
     st.markdown(
+        "Global Startup Intelligence Dashboard, "
         "Explore startup funding, revenue, valuation, "
         "and global business performance."
     )
