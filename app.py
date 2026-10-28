@@ -39,7 +39,7 @@ def display_chart(fig):
         margin=dict(l=20, r=20, t=60, b=20),
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 from pathlib import Path
@@ -313,7 +313,7 @@ if page == "Overview Dashboard":
             margin=dict(l=20, r=20, t=60, b=20),
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     with col2:
 
@@ -339,11 +339,11 @@ if page == "Overview Dashboard":
             margin=dict(l=20, r=20, t=60, b=20),
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     st.subheader("Startup Dataset")
 
-    st.dataframe(dashboard_df, use_container_width=True, hide_index=True)
+    st.dataframe(dashboard_df, width="stretch", hide_index=True)
 
     # --------------------------------------------------
     # EXPORT FILTERED DASHBOARD DATA
@@ -358,7 +358,7 @@ if page == "Overview Dashboard":
         data=csv_data,
         file_name="filtered_startup_data_india.csv",
         mime="text/csv",
-        use_container_width=True,
+        width="stretch",
         key="download_dashboard_data",
     )
 
@@ -533,7 +533,7 @@ elif page == "Business Intelligence":
             margin=dict(l=20, r=20, t=60, b=20),
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     with col2:
 
@@ -559,7 +559,7 @@ elif page == "Business Intelligence":
             margin=dict(l=20, r=20, t=60, b=20),
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     st.subheader("Funding vs Valuation")
 
@@ -581,7 +581,7 @@ elif page == "Business Intelligence":
         margin=dict(l=20, r=20, t=60, b=20),
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.subheader("Revenue vs Valuation")
 
@@ -602,7 +602,7 @@ elif page == "Business Intelligence":
         margin=dict(l=20, r=20, t=60, b=20),
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     # --------------------------------------------------
     # INDUSTRY PERFORMANCE ANALYSIS
@@ -647,9 +647,7 @@ elif page == "Business Intelligence":
 
     st.subheader("Industry Performance Summary")
 
-    st.dataframe(
-        industry_performance.round(2), use_container_width=True, hide_index=True
-    )
+    st.dataframe(industry_performance.round(2), width="stretch", hide_index=True)
 
     # --------------------------------------------------
     # REGIONAL PERFORMANCE ANALYSIS
@@ -700,9 +698,7 @@ elif page == "Business Intelligence":
 
     st.subheader("Regional Performance Summary")
 
-    st.dataframe(
-        regional_performance.round(2), use_container_width=True, hide_index=True
-    )
+    st.dataframe(regional_performance.round(2), width="stretch", hide_index=True)
 
     # --------------------------------------------------
     # STARTUP GROWTH & FOUNDING-YEAR ANALYSIS
@@ -792,7 +788,7 @@ elif page == "Business Intelligence":
 
     st.subheader("Yearly Startup Growth Summary")
 
-    st.dataframe(yearly_growth.round(2), use_container_width=True, hide_index=True)
+    st.dataframe(yearly_growth.round(2), width="stretch", hide_index=True)
 
     # --------------------------------------------------
     # ADVANCED PROFITABILITY ANALYSIS
@@ -926,9 +922,7 @@ elif page == "Business Intelligence":
 
     st.subheader("Profitability Performance Summary")
 
-    st.dataframe(
-        profitability_performance.round(2), use_container_width=True, hide_index=True
-    )
+    st.dataframe(profitability_performance.round(2), width="stretch", hide_index=True)
 
     # --------------------------------------------------
     # FINANCIAL CORRELATION ANALYSIS
@@ -991,7 +985,7 @@ elif page == "Business Intelligence":
 
     st.subheader("Correlation Matrix Table")
 
-    st.dataframe(correlation_matrix.round(3), use_container_width=True)
+    st.dataframe(correlation_matrix.round(3), width="stretch")
 
     # --------------------------------------------------
     # VALUATION CORRELATION RANKING
@@ -1085,15 +1079,11 @@ elif page == "Business Intelligence":
 
         st.subheader("Industry Performance Report")
 
-        st.dataframe(
-            industry_report.round(2), use_container_width=True, hide_index=True
-        )
+        st.dataframe(industry_report.round(2), width="stretch", hide_index=True)
 
         st.subheader("Regional Performance Report")
 
-        st.dataframe(
-            regional_report.round(2), use_container_width=True, hide_index=True
-        )
+        st.dataframe(regional_report.round(2), width="stretch", hide_index=True)
 
         # --------------------------------------------------
         # DOWNLOAD REPORTS
@@ -1108,7 +1098,7 @@ elif page == "Business Intelligence":
                 data=industry_report.round(2).to_csv(index=False).encode("utf-8"),
                 file_name="industry_performance_report.csv",
                 mime="text/csv",
-                use_container_width=True,
+                width="stretch",
                 key="download_industry_report",
             )
 
@@ -1119,7 +1109,7 @@ elif page == "Business Intelligence":
                 data=regional_report.round(2).to_csv(index=False).encode("utf-8"),
                 file_name="regional_performance_report.csv",
                 mime="text/csv",
-                use_container_width=True,
+                width="stretch",
                 key="download_regional_report",
             )
 
@@ -1178,7 +1168,7 @@ elif page == "Valuation Prediction":
             region = st.selectbox("Region", regions)
 
         submitted = st.form_submit_button(
-            "🚀 Predict Startup Valuation", use_container_width=True
+            "🚀 Predict Startup Valuation", width="stretch"
         )
 
     if submitted:
@@ -1422,7 +1412,7 @@ elif page == "Valuation Prediction":
 
         st.metric("Total Predictions", len(history_df))
 
-        st.dataframe(history_df, use_container_width=True, hide_index=True)
+        st.dataframe(history_df, width="stretch", hide_index=True)
 
         # --------------------------------------------------
         # PREDICTION COMPARISON CHART
@@ -1456,14 +1446,14 @@ elif page == "Valuation Prediction":
             data=csv_data,
             file_name="startup_prediction_history.csv",
             mime="text/csv",
-            use_container_width=True,
+            width="stretch",
         )
 
         # --------------------------------------------------
         # CLEAR PREDICTION HISTORY
         # --------------------------------------------------
 
-        if st.button("🗑️ Clear Prediction History", use_container_width=True):
+        if st.button("🗑️ Clear Prediction History", width="stretch"):
 
             st.session_state.prediction_history = []
 
